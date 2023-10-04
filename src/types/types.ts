@@ -27,3 +27,5 @@ export type Booking = Readonly<{
   guests: Guest;
   cabins: Cabins;
 }>;
+
+export type ExtractValues<TObj extends object> = TObj[keyof TObj];

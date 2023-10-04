@@ -1,5 +1,28 @@
 import styled, { css } from 'styled-components';
 
+import { ExtractValues } from '../types/types.ts';
+
+const variationTypes = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  DANGER: 'danger',
+} as const;
+
+const sizesTypes = {
+  SMALL: 'small',
+  MEDIUM: 'medium',
+  LARGE: 'large',
+} as const;
+
+type VariationTypes = ExtractValues<typeof variationTypes>;
+
+type Sizes = ExtractValues<typeof sizesTypes>;
+
+interface IButton {
+  variation?: VariationTypes;
+  size?: Sizes;
+}
+
 const sizes = {
   small: css`
     font-size: 1.2rem;
@@ -48,20 +71,18 @@ const variations = {
   `,
 };
 
-const Button = styled.button`
-  font-size: 1.4rem;
-  padding: 1.2rem 1.6rem;
-  font-weight: 500;
+const Button = styled.button<IButton>`
   border: none;
   border-radius: var(--border-radius-sm);
-  background-color: var(--color-brand-600);
-  color: var(--color-brand-50);
-  cursor: pointer;
   box-shadow: var(--shadow-sm);
 
-  &:hover {
-    background-color: var(--color-brand-700);
-  }
+  ${(props) => sizes[props.size]}
+  ${(props) => variations[props.variation]}
 `;
+
+Button.defaultProps = {
+  variation: variationTypes.PRIMARY,
+  size: sizesTypes.MEDIUM,
+};
 
 export default Button;

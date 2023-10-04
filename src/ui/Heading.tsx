@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components';
 
+import { ExtractValues } from '../types/types.ts';
+
 const headingTypes = {
   H1: 'h1',
   H2: 'h2',
   H3: 'h3',
 } as const;
 
-type HeadingTypes = (typeof headingTypes)[keyof typeof headingTypes];
+type HeadingTypes = ExtractValues<typeof headingTypes>;
 
 interface IHeading {
   as: HeadingTypes;
