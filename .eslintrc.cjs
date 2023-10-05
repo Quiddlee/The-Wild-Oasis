@@ -11,7 +11,7 @@ module.exports = {
     'plugin:import/recommended',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'prettier.config.js', '@typescript-eslint'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'prettier.config.js', '@typescript-eslint', 'node_modules'],
   plugins: ['react', 'react-refresh', 'simple-import-sort', 'import', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
