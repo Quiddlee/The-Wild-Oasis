@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-
-import BookingDataBox from './BookingDataBox.js';
-import Row from '../../ui/Row';
-import Heading from '../../ui/Heading';
-import Tag from '../../ui/Tag';
-import ButtonGroup from '../../ui/ButtonGroup';
-import Button from '../../ui/Button';
-import ButtonText from '../../ui/ButtonText';
-
-import { useMoveBack } from '../../hooks/useMoveBack';
+import useMoveBack from '../../hooks/useMoveBack.ts';
+import Row from '../../ui/Row.tsx';
+import Heading from '../../ui/Heading.tsx';
+import Tag from '../../ui/Tag.tsx';
+import ButtonText from '../../ui/ButtonText.tsx';
+import BookingDataBox from './BookingDataBox.tsx';
+import ButtonGroup from '../../ui/ButtonGroup.tsx';
+import Button from '../../ui/Button.tsx';
 
 const HeadingGroup = styled.div`
   display: flex;

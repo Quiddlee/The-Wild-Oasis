@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { useMoveBack } from '../hooks/useMoveBack.js';
-import Heading from '../ui/Heading';
+import useMoveBack from '../hooks/useMoveBack.ts';
+import Heading from '../ui/Heading.tsx';
 
 const StyledPageNotFound = styled.main`
   height: 100vh;
