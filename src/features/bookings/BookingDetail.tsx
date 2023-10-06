@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import BookingDataBox from './BookingDataBox.tsx';
 import useMoveBack from '../../hooks/useMoveBack.ts';
+import { Booking } from '../../types/types.ts';
 import Button from '../../ui/Button.tsx';
 import ButtonGroup from '../../ui/ButtonGroup.tsx';
 import ButtonText from '../../ui/ButtonText.tsx';
@@ -16,7 +17,7 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
-  const booking = {};
+  const booking = {} as Booking;
   const status = 'checked-in';
 
   const moveBack = useMoveBack();
