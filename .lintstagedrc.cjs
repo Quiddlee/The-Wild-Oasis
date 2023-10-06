@@ -1,4 +1,4 @@
 module.exports = {
-    "./src/**/*.{tsx, ts}": ["eslint", "tsc --noEmmit"],
-    "./src/**/*.{tsx, ts, html, css}": "prettier --write",
+    "./src/**/*.{tsx,ts}": ["pnpm lint", "pnpm type-check"],
+    "./src/**/*.{tsx,ts,html,css}": "pnpm format",
 }
