@@ -1,3 +1,5 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import Account from './pages/Account.tsx';
@@ -11,9 +13,21 @@ import Users from './pages/Users.tsx';
 import GlobalStyles from './styles/GlobalStyles.tsx';
 import AppLayout from './ui/AppLayout.tsx';
 
+const oneMinute = 60 * 1000;
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: oneMinute,
+    },
+  },
+});
+
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen />
+
       <GlobalStyles />
       <HashRouter>
         <Routes>
@@ -30,7 +44,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </HashRouter>
-    </>
+    </QueryClientProvider>
   );
 }
 
