@@ -25,7 +25,7 @@ const StyledStat = styled.div`
   row-gap: 0.4rem;
 `;
 
-const Icon = styled.div`
+const Icon = styled.div<IColorProp>`
   grid-row: 1 / -1;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -34,12 +34,12 @@ const Icon = styled.div`
   justify-content: center;
 
   /* Make these dynamic, based on the received prop */
-  background-color: var(--color-${(props: IColorProp) => props.color}-100);
+  background-color: var(--color-${(props) => props.color}-100);
 
   & svg {
     width: 3.2rem;
     height: 3.2rem;
-    color: var(--color-${(props: IColorProp) => props.color}-700);
+    color: var(--color-${(props) => props.color}-700);
   }
 `;
 
