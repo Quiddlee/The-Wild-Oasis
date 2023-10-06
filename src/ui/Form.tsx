@@ -1,8 +1,11 @@
 import styled, { css } from 'styled-components';
 
-// TODO - find props type
-const Form = styled.form`
-  ${(props: { type: string }) =>
+interface IForm {
+  type: string;
+}
+
+const Form = styled.form<IForm>`
+  ${(props) =>
     props.type !== 'modal' &&
     css`
       padding: 2.4rem 4rem;
@@ -13,7 +16,7 @@ const Form = styled.form`
       border-radius: var(--border-radius-md);
     `}
 
-  ${(props: { type: string }) =>
+  ${(props) =>
     props.type === 'modal' &&
     css`
       width: 80rem;
