@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface IForm {
-  type: string;
+  type?: string;
 }
 
 const Form = styled.form<IForm>`

@@ -1,4 +1,13 @@
-/*
+/* eslint-disable react/jsx-props-no-spreading */
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+
+import Button from '../../ui/Button.tsx';
+import FileInput from '../../ui/FileInput.tsx';
+import Form from '../../ui/Form.tsx';
+import Input from '../../ui/Input.tsx';
+import Textarea from '../../ui/Textarea.tsx';
+
 const FormRow = styled.div`
   display: grid;
   align-items: center;
@@ -26,45 +35,60 @@ const FormRow = styled.div`
   }
 `;
 
-
 const Label = styled.label`
   font-weight: 500;
 `;
 
+/*
 const Error = styled.span`
   font-size: 1.4rem;
   color: var(--color-red-700);
 `;
-
  */
 
 function CreateCabinForm() {
-  /*
-    (
-    <Form>
+  const { register, handleSubmit } = useForm();
+
+  function onSubmit(data: unknown) {
+    // eslint-disable-next-line no-console
+    console.log(data);
+  }
+
+  return (
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow>
         <Label htmlFor="name">Cabin name</Label>
-        <Input type="text" id="name" />
+        <Input type="text" id="name" {...register('name')} />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="maxCapacity">Maximum capacity</Label>
-        <Input type="number" id="maxCapacity" />
+        <Input type="number" id="maxCapacity" {...register('maxCapacity')} />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="regularPrice">Regular price</Label>
-        <Input type="number" id="regularPrice" />
+        <Input type="number" id="regularPrice" {...register('regularPrice')} />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="discount">Discount</Label>
-        <Input type="number" id="discount" defaultValue={0} />
+        <Input
+          type="number"
+          id="discount"
+          defaultValue={0}
+          {...register('discount')}
+        />
       </FormRow>
 
       <FormRow>
         <Label htmlFor="description">Description for website</Label>
-        <Textarea type="number" id="description" defaultValue="" />
+        <Textarea
+          // type="number"
+          id="description"
+          defaultValue=""
+          {...register('description')}
+        />
       </FormRow>
 
       <FormRow>
@@ -73,12 +97,7 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow>
-
-     */
-  // {
-  /* type is an HTML attribute! */
-  // }
-  /*
+        {/* type is an HTML attribute! */}
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
@@ -86,7 +105,6 @@ function CreateCabinForm() {
       </FormRow>
     </Form>
   );
-*/
 }
 
 export default CreateCabinForm;
