@@ -10,7 +10,8 @@
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "precommit": "pnpm lint-staged && pnpm type-check"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.0",

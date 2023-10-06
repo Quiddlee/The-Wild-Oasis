@@ -1,4 +1,4 @@
 module.exports = {
-    "./src/**/*.{tsx,ts}": ["pnpm lint", "pnpm type-check"],
-    "./src/**/*.{tsx,ts,html,css}": "pnpm format",
+  "./src/**/*.{tsx,ts}": "pnpm lint",
+  "./src/**/*.{tsx,ts,html,css}": "pnpm format",
 }
