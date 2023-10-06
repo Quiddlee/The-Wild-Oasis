@@ -13,12 +13,13 @@ import Users from './pages/Users.tsx';
 import GlobalStyles from './styles/GlobalStyles.tsx';
 import AppLayout from './ui/AppLayout.tsx';
 
-const oneMinute = 60 * 1000;
+// const oneMinute = 60 * 1000;
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: oneMinute,
+      // staleTime: oneMinute,
+      staleTime: 0,
     },
   },
 });

@@ -1,11 +1,4 @@
-import styled from 'styled-components';
-
-import Input from '../../ui/Input';
-import Form from '../../ui/Form';
-import Button from '../../ui/Button';
-import FileInput from '../../ui/FileInput';
-import Textarea from '../../ui/Textarea';
-
+/*
 const FormRow = styled.div`
   display: grid;
   align-items: center;
@@ -33,6 +26,7 @@ const FormRow = styled.div`
   }
 `;
 
+
 const Label = styled.label`
   font-weight: 500;
 `;
@@ -42,8 +36,11 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
+ */
+
 function CreateCabinForm() {
-  return (
+  /*
+    (
     <Form>
       <FormRow>
         <Label htmlFor="name">Cabin name</Label>
@@ -76,7 +73,12 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow>
-        {/* type is an HTML attribute! */}
+
+     */
+  // {
+  /* type is an HTML attribute! */
+  // }
+  /*
         <Button variation="secondary" type="reset">
           Cancel
         </Button>
@@ -84,6 +86,7 @@ function CreateCabinForm() {
       </FormRow>
     </Form>
   );
+*/
 }
 
 export default CreateCabinForm;

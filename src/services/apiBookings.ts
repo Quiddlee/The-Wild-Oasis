@@ -1,6 +1,4 @@
-import { getToday } from '../utils/helpers';
-import supabase from './supabase';
-import { Booking } from '../types';
+/*
 
 export async function getBooking(id: Pick<Booking, 'id'>) {
   const { data, error } = await supabase
@@ -96,3 +94,5 @@ export async function deleteBooking(id) {
   }
   return data;
 }
+
+ */

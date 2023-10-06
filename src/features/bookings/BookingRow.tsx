@@ -1,11 +1,9 @@
-import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
+import styled from 'styled-components';
 
-import Tag from '../../ui/Tag';
-import Table from '../../ui/Table';
-
-import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
-import { Booking } from '../../types';
+import { Booking } from '../../types/types.ts';
+import Tag from '../../ui/Tag.tsx';
+import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers.ts';
 
 interface IBookingRowProps {
   booking: Booking;
@@ -40,12 +38,12 @@ const Amount = styled.div`
 
 function BookingRow({
   booking: {
-    id: bookingId,
-    created_at,
+    // id: bookingId,
+    // created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
+    // numGuests,
     totalPrice,
     status,
     guests: { fullName: guestName, email },
@@ -59,7 +57,8 @@ function BookingRow({
   };
 
   return (
-    <Table.Row>
+    // <Table.Row>
+    <>
       <Cabin>{cabinName}</Cabin>
 
       <Stacked>
@@ -85,7 +84,8 @@ function BookingRow({
       </Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
-    </Table.Row>
+    </>
+    // </Table.Row>
   );
 }
 

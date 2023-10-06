@@ -20,9 +20,9 @@ export type Cabin = Readonly<{
 
 export type Booking = Readonly<{
   id: number;
-  created_at: Date;
-  startDate: Date;
-  endDate: Date;
+  createdAt: Date;
+  startDate: string;
+  endDate: string;
   numNights: number;
   numGuests: number;
   cabinPrice: number;

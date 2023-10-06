@@ -1,9 +1,6 @@
-import Form from '../../ui/Form';
-import FormRow from '../../ui/FormRow';
-import Input from '../../ui/Input';
-
 function UpdateSettingsForm() {
-  return (
+  return <div />;
+  /*
     <Form>
       <FormRow label="Minimum nights/booking">
         <Input type="number" id="min-nights" />
@@ -18,7 +15,8 @@ function UpdateSettingsForm() {
         <Input type="number" id="breakfast-price" />
       </FormRow>
     </Form>
-  );
+
+       */
 }
 
 export default UpdateSettingsForm;

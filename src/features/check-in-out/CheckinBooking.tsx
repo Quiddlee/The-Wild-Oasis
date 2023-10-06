@@ -1,35 +1,39 @@
-import styled from 'styled-components';
-import useMoveBack from '../../hooks/useMoveBack.ts';
-import Row from '../../ui/Row.tsx';
-import Heading from '../../ui/Heading.tsx';
-import ButtonText from '../../ui/ButtonText.tsx';
-import BookingDataBox from '../bookings/BookingDataBox.tsx';
-import ButtonGroup from '../../ui/ButtonGroup.tsx';
-import Button from '../../ui/Button.tsx';
+import { useCallback } from 'react';
 
-const Box = styled.div`
-  /* Box */
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-  padding: 2.4rem 4rem;
-`;
+import useMoveBack from '../../hooks/useMoveBack.ts';
+import { Booking } from '../../types/types.ts';
+import Button from '../../ui/Button.tsx';
+import ButtonGroup from '../../ui/ButtonGroup.tsx';
+import ButtonText from '../../ui/ButtonText.tsx';
+import Heading from '../../ui/Heading.tsx';
+import Row from '../../ui/Row.tsx';
+import BookingDataBox from '../bookings/BookingDataBox.tsx';
+
+// const Box = styled.div`
+//   /* Box */
+//   background-color: var(--color-grey-0);
+//   border: 1px solid var(--color-grey-100);
+//   border-radius: var(--border-radius-md);
+//   padding: 2.4rem 4rem;
+// `;
 
 function CheckinBooking() {
   const moveBack = useMoveBack();
 
-  const booking = {};
+  const booking = {} as Booking;
 
   const {
     id: bookingId,
+    /*
     guests,
     totalPrice,
     numGuests,
     hasBreakfast,
     numNights,
+       */
   } = booking;
 
-  function handleCheckin() {}
+  const handleCheckin = useCallback(() => {}, []);
 
   return (
     <>

@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+import type { Cabin } from '../../types/types.ts';
+import { formatCurrency } from '../../utils/helpers.ts';
+
+interface ICabinRow {
+  cabin: Cabin;
+}
+
 const TableRow = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
@@ -21,7 +28,7 @@ const Img = styled.img`
   transform: scale(1.5) translateX(-7px);
 `;
 
-const Cabin = styled.div`
+const Cabins = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: var(--color-grey-600);
@@ -38,3 +45,20 @@ const Discount = styled.div`
   font-weight: 500;
   color: var(--color-green-700);
 `;
+
+function CabinRow({ cabin }: ICabinRow) {
+  const { name, maxCapacity, regularPrice, discount, image } = cabin;
+
+  return (
+    <TableRow>
+      <Img src={image} />
+      <Cabins>{name}</Cabins>
+      <div>Fits it up to {maxCapacity} guests</div>
+      <Price>{formatCurrency(regularPrice)}</Price>
+      <Discount>{formatCurrency(discount)}</Discount>
+      <button type="button">Delete</button>
+    </TableRow>
+  );
+}
+
+export default CabinRow;

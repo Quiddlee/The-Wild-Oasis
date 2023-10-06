@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
 import {
   HiOutlineChatBubbleBottomCenterText,
@@ -6,12 +5,12 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineHomeModern,
 } from 'react-icons/hi2';
+import styled from 'styled-components';
 
-import DataItem from '../../ui/DataItem';
-import { Flag } from '../../ui/Flag';
-
-import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
-import { Booking } from '../../types';
+import { Booking } from '../../types/types.ts';
+import DataItem from '../../ui/DataItem.tsx';
+import Flag from '../../ui/Flag.tsx';
+import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers.ts';
 
 interface IPriceProps {
   isPaid: boolean;
@@ -77,7 +76,7 @@ const Guest = styled.div`
   }
 `;
 
-const Price = styled.div`
+const Price = styled.div<IPriceProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -85,9 +84,9 @@ const Price = styled.div`
   border-radius: var(--border-radius-sm);
   margin-top: 2.4rem;
 
-  background-color: ${(props: IPriceProps) =>
+  background-color: ${(props) =>
     props.isPaid ? 'var(--color-green-100)' : 'var(--color-yellow-100)'};
-  color: ${(props: IPriceProps) =>
+  color: ${(props) =>
     props.isPaid ? 'var(--color-green-700)' : 'var(--color-yellow-700)'};
 
   & p:last-child {
@@ -113,7 +112,8 @@ const Footer = styled.footer`
 // A purely presentational component
 function BookingDataBox({ booking }: IBookingDataBoxProps) {
   const {
-    created_at,
+    // created_at
+    createdAt,
     startDate,
     endDate,
     numNights,
@@ -172,7 +172,7 @@ function BookingDataBox({ booking }: IBookingDataBoxProps) {
         </DataItem>
 
         <Price isPaid={isPaid}>
-          <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
+          <DataItem icon={<HiOutlineCurrencyDollar />} label="Total price">
             {formatCurrency(totalPrice)}
 
             {hasBreakfast &&
@@ -186,7 +186,7 @@ function BookingDataBox({ booking }: IBookingDataBoxProps) {
       </Section>
 
       <Footer>
-        <p>Booked {format(new Date(created_at), 'EEE, MMM dd yyyy, p')}</p>
+        <p>Booked {format(new Date(createdAt), 'EEE, MMM dd yyyy, p')}</p>
       </Footer>
     </StyledBookingDataBox>
   );

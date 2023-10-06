@@ -11,7 +11,7 @@ interface IOptions {
 export const subtractDates = (dateStr1: DateStr, dateStr2: DateStr) =>
   differenceInDays(parseISO(String(dateStr1)), parseISO(String(dateStr2)));
 
-export const formatDistanceFromNow = (dateStr: DateStr) =>
+export const formatDistanceFromNow = (dateStr: string) =>
   formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   })

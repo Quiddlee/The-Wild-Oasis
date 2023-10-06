@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface IDataItemProps {
-  icon: string;
+  icon: React.ReactElement;
   label: string;
   children: React.ReactNode;
 }

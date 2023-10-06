@@ -1,7 +1,6 @@
-import Filter from 'ui/Filter';
-
 function DashboardFilter() {
-  return (
+  return <div />;
+  /*
     <Filter
       filterField='last'
       options={[
@@ -10,7 +9,8 @@ function DashboardFilter() {
         { value: '90', label: 'Last 90 days' },
       ]}
     />
-  );
+
+       */
 }
 
 export default DashboardFilter;

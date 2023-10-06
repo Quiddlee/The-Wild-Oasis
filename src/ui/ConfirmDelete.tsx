@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import Button from './Button.js';
-import Heading from './Heading';
+
+import Button from './Button.tsx';
+import Heading from './Heading.tsx';
 
 interface IConfirmDeleteProps {
   resourceName: string;
-  onConfirm: () => void;
+  // onConfirm: () => void;
   disabled: boolean;
 }
 
@@ -28,7 +29,7 @@ const StyledConfirmDelete = styled.div`
 
 function ConfirmDelete({
   resourceName,
-  onConfirm,
+  // onConfirm,
   disabled,
 }: IConfirmDeleteProps) {
   return (

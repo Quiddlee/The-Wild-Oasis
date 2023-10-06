@@ -51,6 +51,7 @@ function Checkbox({
         onChange={onChange}
         disabled={disabled}
       />
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor={!disabled ? id : ''}>{children}</label>
     </StyledCheckbox>
   );
