@@ -1,17 +1,25 @@
 export type Guest = Readonly<{
+  id: number;
   fullName: string;
   email: string;
   country: string;
   countryFlag: string;
   nationalID: string;
+  nationality: string;
 }>;
 
-export type Cabins = Readonly<{
+export type Cabin = Readonly<{
+  id: number;
   name: string;
+  maxCapacity: number;
+  regularPrice: number;
+  discount: number;
+  description: string;
+  image: string;
 }>;
 
 export type Booking = Readonly<{
-  id: string;
+  id: number;
   created_at: Date;
   startDate: Date;
   endDate: Date;
@@ -20,12 +28,21 @@ export type Booking = Readonly<{
   cabinPrice: number;
   extrasPrice: number;
   totalPrice: number;
+  status: string;
   hasBreakfast: boolean;
   observations: boolean;
+  cabinId: number;
+  guestId: number;
   isPaid: boolean;
-  status: string;
   guests: Guest;
-  cabins: Cabins;
+  cabins: Cabin;
+}>;
+
+export type Settings = Readonly<{
+  minBookingLength: number;
+  maxBookingLength: number;
+  maxGuestsPerBooking: number;
+  breakfastPrice: number;
 }>;
 
 export type ExtractValues<TObj extends object> = TObj[keyof TObj];
