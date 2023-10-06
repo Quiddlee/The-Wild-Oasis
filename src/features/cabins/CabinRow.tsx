@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { isError, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';
 
@@ -61,11 +61,7 @@ function CabinRow({ cabin }: ICabinRow) {
     },
 
     onError: (error) => {
-      if (error && typeof error === 'object' && 'message' in error)
-        toast.error(
-          (error.message as string) ??
-            'An unknown error occurred 😱. Please, try again later 🥺',
-        );
+      if (isError(error)) toast.error(error.message);
     },
   });
 
