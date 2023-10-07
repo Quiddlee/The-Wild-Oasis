@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 import { createCabin } from '../../services/apiCabins.ts';
-import { Cabin } from '../../types/types.ts';
+import { CreateCabinFormData } from '../../types/types.ts';
 import Button from '../../ui/Button.tsx';
 import FileInput from '../../ui/FileInput.tsx';
 import Form from '../../ui/Form.tsx';
@@ -13,7 +13,8 @@ import Input from '../../ui/Input.tsx';
 import Textarea from '../../ui/Textarea.tsx';
 
 function CreateCabinForm() {
-  const { register, handleSubmit, reset, formState } = useForm<Cabin>();
+  const { register, handleSubmit, reset, formState } =
+    useForm<CreateCabinFormData>();
   const { errors } = formState;
   const queryClient = useQueryClient();
 
@@ -29,8 +30,8 @@ function CreateCabinForm() {
     },
   });
 
-  function onSubmit(data: Cabin) {
-    mutate(data);
+  function onSubmit(data: CreateCabinFormData) {
+    mutate({ ...data, image: data.image.item(0) as File });
   }
 
   function onError(/* err: FieldErrors */) {
@@ -114,7 +115,13 @@ function CreateCabinForm() {
       </FormRow>
 
       <FormRow label="Cabin photo" error={errors?.image?.message}>
-        <FileInput id="image" accept="image/*" />
+        <FileInput
+          id="image"
+          accept="image/*"
+          {...register('image', {
+            required: 'This field is required',
+          })}
+        />
       </FormRow>
 
       <FormRow>

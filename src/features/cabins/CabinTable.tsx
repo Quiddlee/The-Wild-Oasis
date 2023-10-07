@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import CabinRow from './CabinRow.tsx';
 import getCabins from '../../services/apiCabins.ts';
+import { Cabin } from '../../types/types.ts';
 import Spinner from '../../ui/Spinner.tsx';
 
 const Table = styled.div`
@@ -35,7 +36,11 @@ function CabinTable() {
     queryFn: getCabins,
   });
 
-  if (isLoading || !cabins) return <Spinner />;
+  if (isLoading) return <Spinner />;
+
+  if (!cabins) {
+    return null;
+  }
 
   return (
     <Table role="table">
@@ -49,7 +54,7 @@ function CabinTable() {
       </TableHeader>
 
       {cabins.map((cabin) => (
-        <CabinRow cabin={cabin} key={cabin.id} />
+        <CabinRow cabin={cabin as Cabin} key={cabin.id} />
       ))}
     </Table>
   );
