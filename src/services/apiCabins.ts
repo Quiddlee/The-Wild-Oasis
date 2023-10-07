@@ -1,9 +1,14 @@
 /* eslint-disable no-console */
 
 import supabase from './supabase.ts';
-import { CreateCabinFormData } from '../types/types.ts';
+import { Cabin, CreateCabinFormData } from '../types/types.ts';
 
-type NewCabin = Omit<CreateCabinFormData, 'image'> & { readonly image: File };
+export type NewCabin = Omit<CreateCabinFormData, 'image'> & {
+  readonly image: string | File;
+};
+
+const isImageExist = (image: File | string): image is string =>
+  typeof image === 'string';
 
 async function getCabins() {
   const { data, error } = await supabase.from('cabins').select('*');
@@ -16,26 +21,38 @@ async function getCabins() {
   return data;
 }
 
-export async function createCabin(newCabin: NewCabin) {
+export async function createEditCabin(newCabin: NewCabin, id?: Cabin['id']) {
+  const hasImagePath = isImageExist(newCabin.image);
+
   // Getting sure that the image has unique name with random num.
   // Also replacing '/' for supabase to not incidental create a folder instead of image e.g. cabin-001/2.jpg -> cabin-0012.jpg
-  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
-    '/',
-    '',
-  );
+  const imageName = hasImagePath
+    ? newCabin.image
+    : `${Math.random()}-${newCabin.image.name}`.replaceAll('/', '');
 
   // Will look like this - https://lkpuukpquesenlbgflwk.supabase.co/storage/v1/object/public/cabin-images/cabin-001.jpg
-  const imagePath = `${
-    import.meta.env.VITE_SUPABASE_URL
-  }/storage/v1/object/public/cabin-images/${imageName}`;
+  const imagePath = hasImagePath
+    ? newCabin.image
+    : `${
+        import.meta.env.VITE_SUPABASE_URL
+      }/storage/v1/object/public/cabin-images/${imageName}`;
 
-  // 1. Crete the cabin
-  const { data, error } = await supabase
-    .from('cabins')
-    .insert([{ ...newCabin, image: imagePath }])
-    .select();
+  // 1. Crete/edit the cabin
+  let query = supabase.from('cabins');
 
-  if (error || !newCabin?.image || !data?.at(0)) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // A) Create
+  if (!id) query = query.insert([{ ...newCabin, image: imagePath }]);
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // B) Edit
+  if (id) query = query.update({ ...newCabin, image: imagePath }).eq('id', id);
+
+  const { data, error } = await query.select().single();
+
+  if (error || !newCabin?.image) {
     console.error(error);
     throw new Error('Cabin could not be created');
   }
@@ -47,7 +64,7 @@ export async function createCabin(newCabin: NewCabin) {
 
   // 3. Delete the cabin if there was an error uploading an image
   if (storageError) {
-    await supabase.from('cabins').delete().eq('id', data.at(0)!.id);
+    await supabase.from('cabins').delete().eq('id', data.id);
 
     console.error(storageError);
     throw new Error(

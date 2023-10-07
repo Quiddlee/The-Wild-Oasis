@@ -47,7 +47,7 @@ export type Settings = Readonly<{
 
 export type ExtractValues<TObj extends object> = TObj[keyof TObj];
 
-export type CreateCabinFormData = Omit<Cabin, 'image'> &
+export type CreateCabinFormData = Omit<Cabin, 'image' | 'id'> &
   Readonly<{
-    image: FileList;
+    image: FileList | string;
   }>;
