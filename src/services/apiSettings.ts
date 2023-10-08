@@ -1,8 +1,18 @@
 /* eslint-disable no-console */
 
 import supabase from './supabase.ts';
+import { Tables } from '../../database.types.ts';
 
-async function getSettings() {
+export type FormSettingsKeys = keyof Omit<
+  Tables<'settings'>,
+  'id' | 'created_at'
+>;
+
+type INewSettings = {
+  [key in FormSettingsKeys]?: number | null | undefined;
+};
+
+export async function getSettings() {
   const { data, error } = await supabase.from('settings').select('*').single();
 
   if (error) {
@@ -13,9 +23,8 @@ async function getSettings() {
   return data;
 }
 
-/*
 // We expect a newSetting object that looks like {setting: newValue}
-export async function updateSetting(newSetting) {
+export async function updateSetting(newSetting: INewSettings) {
   const { data, error } = await supabase
     .from('settings')
     .update(newSetting)
@@ -30,6 +39,3 @@ export async function updateSetting(newSetting) {
 
   return data;
 }
- */
-
-export default getSettings;
