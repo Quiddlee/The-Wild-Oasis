@@ -2,7 +2,7 @@
 import { useForm } from 'react-hook-form';
 
 import useCreateCabin from './useCreateCabin.ts';
-import useEditCabin from './useEditCabin.ts';
+import useUpdateCabin from './useUpdateCabin.ts';
 import type { Cabin } from '../../types/types.ts';
 import { CreateCabinFormData } from '../../types/types.ts';
 import Button from '../../ui/Button.tsx';
@@ -29,7 +29,7 @@ function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
     });
 
   const { isCreating, createCabin } = useCreateCabin();
-  const { editCabin, isEditing } = useEditCabin();
+  const { editCabin, isEditing } = useUpdateCabin();
 
   const { errors } = formState;
   const isWorking = isCreating || isEditing;
@@ -164,7 +164,7 @@ function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
             Cancel
           </Button>
           <Button disabled={isWorking}>
-            {isEditSession ? 'Edit cabin' : 'Create new cabin'}
+            {isEditSession ? 'Update cabin' : 'Create new cabin'}
           </Button>
         </>
       </FormRow>

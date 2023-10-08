@@ -9,7 +9,7 @@ interface IUpdateMutationFn {
   id: Cabin['id'];
 }
 
-function useEditCabin() {
+function useUpdateCabin() {
   const queryClient = useQueryClient();
 
   const { mutate: editCabin, isLoading: isEditing } = useMutation({
@@ -27,4 +27,4 @@ function useEditCabin() {
   return { editCabin, isEditing };
 }
 
-export default useEditCabin;
+export default useUpdateCabin;
