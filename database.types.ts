@@ -146,12 +146,12 @@ export interface Database {
       };
       settings: {
         Row: {
-          breakfastPrice: number | null;
+          breakfastPrice: number;
           created_at: string;
           id: number;
-          maxBookingLength: number | null;
-          maxGuestsPerBooking: number | null;
-          minBookingLength: number | null;
+          maxBookingLength: number;
+          maxGuestsPerBooking: number;
+          minBookingLength: number;
         };
         Insert: {
           breakfastPrice?: number | null;
