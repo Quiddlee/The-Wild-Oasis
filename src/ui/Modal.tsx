@@ -1,4 +1,11 @@
-import React from 'react';
+import React, {
+  cloneElement,
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 import { createPortal } from 'react-dom';
 import { HiXMark } from 'react-icons/hi2';
@@ -54,23 +61,78 @@ const Button = styled.button`
 `;
 
 interface ModalProps {
-  children: React.ReactNode;
-  onClose: () => void;
+  children: React.ReactElement;
+  name: string;
 }
 
-function Modal({ children, onClose }: ModalProps) {
+interface ModalContextProvider {
+  openName: string;
+  close: () => void;
+  open: (name: string) => void;
+}
+
+const ModalContext = createContext<ModalContextProvider>(
+  {} as ModalContextProvider,
+);
+
+function Modal({ children }: { children: React.ReactNode }) {
+  const [openName, setOpenName] = useState('');
+
+  const close = useCallback(() => setOpenName(''), [setOpenName]);
+  const open = setOpenName;
+
+  const contextValue = useMemo(
+    () => ({
+      openName,
+      close,
+      open,
+    }),
+    [close, open, openName],
+  );
+
+  return (
+    <ModalContext.Provider value={contextValue}>
+      {children}
+    </ModalContext.Provider>
+  );
+}
+
+function Open({
+  children,
+  opens: opensWindowName,
+}: {
+  children: React.ReactElement;
+  opens: string;
+}) {
+  const { open } = useContext(ModalContext);
+
+  return cloneElement(children, { onClick: () => open(opensWindowName) });
+}
+
+function Window({ children, name }: ModalProps) {
+  const { openName, close } = useContext(ModalContext);
+
+  const modalNotOpen = name !== openName;
+
+  if (modalNotOpen) return null;
+
+  const elemWithClose = cloneElement(children, { onCloseModal: close });
+
   return createPortal(
     <Overlay>
       <StyledModal>
-        <Button onClick={onClose}>
+        <Button onClick={close}>
           <HiXMark />
         </Button>
 
-        <div>{children}</div>
+        <div>{elemWithClose}</div>
       </StyledModal>
     </Overlay>,
     document.body,
   );
 }
+
+Modal.Open = Open;
+Modal.Window = Window;
 
 export default Modal;
