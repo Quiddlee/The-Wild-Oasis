@@ -14,9 +14,13 @@ import Textarea from '../../ui/Textarea.tsx';
 
 interface ICreateCabinForm {
   cabinToEdit?: Cabin;
+  onCloseModal?: () => void;
 }
 
-function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
+function CreateCabinForm({
+  onCloseModal,
+  cabinToEdit = {} as Cabin,
+}: ICreateCabinForm) {
   const { id: editId, ...editValue } = cabinToEdit;
 
   const isEditSession = Boolean(editId);
@@ -33,6 +37,8 @@ function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
 
   const { errors } = formState;
   const isWorking = isCreating || isEditing;
+  const isFormInModal = Boolean(onCloseModal);
+  const formType = isFormInModal ? 'modal' : 'regular';
 
   function onSubmit(data: CreateCabinFormData) {
     const isImageUpdated = typeof data.image !== 'string';
@@ -49,7 +55,10 @@ function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
           id: editId,
         },
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         },
       );
     }
@@ -72,7 +81,7 @@ function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)} type={formType}>
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -160,7 +169,10 @@ function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
       <FormRow>
         <>
           {/* type is an HTML attribute! */}
-          <Button variation="secondary" type="reset">
+          <Button
+            onClick={() => onCloseModal?.()}
+            variation="secondary"
+            type="reset">
             Cancel
           </Button>
           <Button disabled={isWorking}>
@@ -174,6 +186,7 @@ function CreateCabinForm({ cabinToEdit = {} as Cabin }: ICreateCabinForm) {
 
 CreateCabinForm.defaultProps = {
   cabinToEdit: {} as Cabin,
+  onCloseModal: null,
 };
 
 export default CreateCabinForm;

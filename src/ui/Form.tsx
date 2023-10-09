@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 
 interface IForm {
-  type?: string;
+  type?: 'modal' | 'regular';
 }
 
 const Form = styled.form<IForm>`
   ${(props) =>
-    props.type !== 'modal' &&
+    props.type === 'regular' &&
     css`
       padding: 2.4rem 4rem;
 
@@ -26,4 +26,12 @@ const Form = styled.form<IForm>`
   font-size: 1.4rem;
 `;
 
+Form.defaultProps = {
+  type: 'regular',
+};
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export default Form;
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
