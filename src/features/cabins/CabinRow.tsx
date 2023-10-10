@@ -7,23 +7,12 @@ import useDeleteCabin from './useDeleteCabin.ts';
 import type { Cabin } from '../../types/types.ts';
 import ConfirmDelete from '../../ui/ConfirmDelete.tsx';
 import Modal from '../../ui/Modal.tsx';
+import Table from '../../ui/Table.tsx';
 import { formatCurrency } from '../../utils/helpers.ts';
 
 interface ICabinRow {
   cabin: Cabin;
 }
-
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
 
 const Img = styled.img`
   display: block;
@@ -79,7 +68,7 @@ function CabinRow({ cabin }: ICabinRow) {
   }
 
   return (
-    <TableRow>
+    <Table.Row>
       <Img src={image} />
       <Cabins>{name}</Cabins>
       <div>Fits it up to {maxCapacity} guests</div>
@@ -120,7 +109,7 @@ function CabinRow({ cabin }: ICabinRow) {
           </Modal.Window>
         </Modal>
       </div>
-    </TableRow>
+    </Table.Row>
   );
 }
 
