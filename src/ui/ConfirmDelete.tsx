@@ -5,8 +5,9 @@ import Heading from './Heading.tsx';
 
 interface IConfirmDeleteProps {
   resourceName: string;
-  // onConfirm: () => void;
+  onConfirm: () => void;
   disabled: boolean;
+  onCloseModal?: () => void;
 }
 
 const StyledConfirmDelete = styled.div`
@@ -29,8 +30,9 @@ const StyledConfirmDelete = styled.div`
 
 function ConfirmDelete({
   resourceName,
-  // onConfirm,
+  onConfirm,
   disabled,
+  onCloseModal,
 }: IConfirmDeleteProps) {
   return (
     <StyledConfirmDelete>
@@ -41,15 +43,22 @@ function ConfirmDelete({
       </p>
 
       <div>
-        <Button variation="secondary" disabled={disabled}>
+        <Button
+          onClick={onCloseModal}
+          variation="secondary"
+          disabled={disabled}>
           Cancel
         </Button>
-        <Button variation="danger" disabled={disabled}>
+        <Button onClick={onConfirm} variation="danger" disabled={disabled}>
           Delete
         </Button>
       </div>
     </StyledConfirmDelete>
   );
 }
+
+ConfirmDelete.defaultProps = {
+  onCloseModal: null,
+};
 
 export default ConfirmDelete;
