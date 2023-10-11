@@ -113,7 +113,7 @@ function Open({
 
 function Window({ children, name }: ModalProps) {
   const { openName, close } = useContext(ModalContext);
-  const ref = useOutsideClick(close);
+  const ref = useOutsideClick<HTMLDivElement>(close);
 
   const modalNotOpen = name !== openName;
 
