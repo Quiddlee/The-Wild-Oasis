@@ -2,6 +2,8 @@ import React, { createContext, useContext, useMemo } from 'react';
 
 import styled from 'styled-components';
 
+import { Cabin } from '../types/types.ts';
+
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
 
@@ -38,11 +40,9 @@ const StyledRow = styled(CommonRow)`
   }
 `;
 
-/*
 const StyledBody = styled.section`
   margin: 0.4rem 0;
 `;
- */
 
 const Footer = styled.footer`
   background-color: var(--color-grey-50);
@@ -56,14 +56,12 @@ const Footer = styled.footer`
   }
 `;
 
-/*
 const Empty = styled.p`
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
   margin: 2.4rem;
 `;
- */
 
 interface ICommonRow {
   columns: string;
@@ -76,6 +74,11 @@ interface IChildren {
 interface ITableProps extends ICommonRow, IChildren {}
 
 interface ITableContext extends ICommonRow {}
+
+interface IBodyProps {
+  data: Cabin[];
+  render: (cabin: Cabin) => React.ReactNode;
+}
 
 const TableContext = createContext<ITableContext>({} as ITableContext);
 
@@ -109,10 +112,16 @@ function Row({ children }: IChildren) {
   );
 }
 
-// function Body({ children }: IChildren) {}
+function Body({ data, render }: IBodyProps) {
+  const noData = !data.length;
+
+  if (noData) return <Empty>No data to show at the moment</Empty>;
+
+  return <StyledBody>{data.map(render)}</StyledBody>;
+}
 
 Table.Header = Header;
-// Table.Body = Body;
+Table.Body = Body;
 Table.Row = Row;
 Table.Footer = Footer;
 
