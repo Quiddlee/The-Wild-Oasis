@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 function useUrl() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  function readUrl<TQuery>(query: string) {
+  function readUrl<TQuery extends string>(query: string) {
     return searchParams.get(query) as TQuery | null;
   }
 

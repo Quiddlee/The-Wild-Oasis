@@ -1,3 +1,2 @@
-const QUERY_DISCOUNT = 'discount';
-
-export default QUERY_DISCOUNT;
+export const QUERY_DISCOUNT = 'discount';
+export const QUERY_SORT = 'soryBy';

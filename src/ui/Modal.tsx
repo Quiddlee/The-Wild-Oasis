@@ -12,6 +12,7 @@ import { HiXMark } from 'react-icons/hi2';
 import styled from 'styled-components';
 
 import useOutsideClick from '../hooks/useOutsideClick.ts';
+import { VoidFn } from '../types/types.ts';
 
 const StyledModal = styled.div`
   position: fixed;
@@ -69,7 +70,7 @@ interface ModalProps {
 
 interface ModalContextProvider {
   openName: string;
-  close: () => void;
+  close: VoidFn;
   open: (name: string) => void;
 }
 

@@ -1,18 +1,15 @@
 import { useSearchParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import { IOptions } from '../types/interfaces.ts';
+
 interface IFilterButton {
   active: boolean;
 }
 
-interface Options<TValues extends string> {
-  value: TValues;
-  label: string;
-}
-
-interface IFilterProps<TOptionsValues extends string> {
+interface IFilterProps<TOptionsValues extends string>
+  extends IOptions<TOptionsValues> {
   filterField: string;
-  options: Options<TOptionsValues>[];
 }
 
 const StyledFilter = styled.div`

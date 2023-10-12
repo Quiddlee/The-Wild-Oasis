@@ -1,12 +1,16 @@
 import CabinRow from './CabinRow.tsx';
 import useCabins from './useCabins.ts';
 import useUrl from '../../hooks/useUrl.ts';
-import { DiscountFilterValues } from '../../types/enums.ts';
-import { Cabin, DiscountFilterValueTypes } from '../../types/types.ts';
+import { DiscountFilterValues, SortValues } from '../../types/enums.ts';
+import {
+  Cabin,
+  DiscountFilterValueTypes,
+  SortValueTypes,
+} from '../../types/types.ts';
 import Menus from '../../ui/Menus.tsx';
 import Spinner from '../../ui/Spinner.tsx';
 import Table from '../../ui/Table.tsx';
-import { QUERY_DISCOUNT } from '../../utils/const.ts';
+import { QUERY_DISCOUNT, QUERY_SORT } from '../../utils/const.ts';
 
 function CabinTable() {
   const { cabins = [], isLoading } = useCabins();
@@ -14,6 +18,7 @@ function CabinTable() {
 
   if (isLoading) return <Spinner />;
 
+  // 1) Filter
   const filterValue =
     readUrl<DiscountFilterValueTypes>(QUERY_DISCOUNT) ??
     DiscountFilterValues.ALL;
@@ -23,6 +28,18 @@ function CabinTable() {
     filteredCabins = filteredCabins.filter(({ discount }) => discount === 0);
   if (filterValue === 'with-discount')
     filteredCabins = filteredCabins.filter(({ discount }) => discount > 0);
+
+  // 2) Sort
+  const sortBy = readUrl<SortValueTypes>(QUERY_SORT) ?? SortValues.NAME_ASC;
+  const [fieldName, direction] = sortBy.split('-');
+  const modifier = direction === 'asc' ? 1 : -1;
+
+  const sortedCabins = filteredCabins.sort(
+    (a, b) =>
+      ((a[fieldName as keyof Cabin] as number) -
+        (b[fieldName as keyof Cabin] as number)) *
+      modifier,
+  );
 
   return (
     <Menus>
@@ -37,7 +54,7 @@ function CabinTable() {
         </Table.Header>
 
         <Table.Body
-          data={filteredCabins}
+          data={sortedCabins}
           render={(cabin: Cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
