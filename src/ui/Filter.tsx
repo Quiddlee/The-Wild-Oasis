@@ -68,6 +68,7 @@ function Filter<TOptionValues extends string>({
       {options.map((option) => (
         <FilterButton
           active={currFilter === option.value}
+          disabled={currFilter === option.value}
           key={option.value}
           onClick={() => handleClick(option.value)}>
           {option.label}
