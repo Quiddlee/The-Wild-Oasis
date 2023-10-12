@@ -1,22 +1,21 @@
-import { useSearchParams } from 'react-router-dom';
-
 import CabinRow from './CabinRow.tsx';
 import useCabins from './useCabins.ts';
-import DiscountFilterValues from '../../types/enums.ts';
+import useUrl from '../../hooks/useUrl.ts';
+import { DiscountFilterValues } from '../../types/enums.ts';
 import { Cabin, DiscountFilterValueTypes } from '../../types/types.ts';
 import Menus from '../../ui/Menus.tsx';
 import Spinner from '../../ui/Spinner.tsx';
 import Table from '../../ui/Table.tsx';
-import QUERY_DISCOUNT from '../../utils/const.ts';
+import { QUERY_DISCOUNT } from '../../utils/const.ts';
 
 function CabinTable() {
   const { cabins = [], isLoading } = useCabins();
-  const [searchParams] = useSearchParams();
+  const { readUrl } = useUrl();
 
   if (isLoading) return <Spinner />;
 
   const filterValue =
-    (searchParams.get(QUERY_DISCOUNT) as DiscountFilterValueTypes) ??
+    readUrl<DiscountFilterValueTypes>(QUERY_DISCOUNT) ??
     DiscountFilterValues.ALL;
   let filteredCabins = cabins as Cabin[];
 
