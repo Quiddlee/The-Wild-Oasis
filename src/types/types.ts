@@ -1,3 +1,5 @@
+import DiscountFilterValues from './enums.ts';
+
 export type Guest = Readonly<{
   id: number;
   fullName: string;
@@ -51,3 +53,6 @@ export type CreateCabinFormData = Omit<Cabin, 'image' | 'id'> &
   Readonly<{
     image: FileList | string;
   }>;
+
+export type DiscountFilterValueTypes =
+  (typeof DiscountFilterValues)[keyof typeof DiscountFilterValues];
