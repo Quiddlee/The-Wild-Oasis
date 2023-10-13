@@ -1,11 +1,11 @@
 import CabinRow from './CabinRow.tsx';
 import useCabins from './useCabins.ts';
 import useUrl from '../../hooks/useUrl.ts';
-import { DiscountFilterValues, SortValues } from '../../types/enums.ts';
+import { CabinsFilterValues, CabinsSortValues } from '../../types/enums.ts';
 import {
+  CabinsFilterValueTypes,
+  CabinsSortValueTypes,
   CabinType,
-  DiscountFilterValueTypes,
-  SortValueTypes,
 } from '../../types/types.ts';
 import Empty from '../../ui/Empty.tsx';
 import Menus from '../../ui/Menus.tsx';
@@ -24,8 +24,7 @@ function CabinTable() {
 
   // 1) Filter
   const filterValue =
-    readUrl<DiscountFilterValueTypes>(QUERY_DISCOUNT) ??
-    DiscountFilterValues.ALL;
+    readUrl<CabinsFilterValueTypes>(QUERY_DISCOUNT) ?? CabinsFilterValues.ALL;
   let filteredCabins = cabins as CabinType[];
 
   if (filterValue === 'no-discount')
@@ -34,7 +33,8 @@ function CabinTable() {
     filteredCabins = filteredCabins.filter(({ discount }) => discount > 0);
 
   // 2) Sort
-  const sortBy = readUrl<SortValueTypes>(QUERY_SORT) ?? SortValues.NAME_ASC;
+  const sortBy =
+    readUrl<CabinsSortValueTypes>(QUERY_SORT) ?? CabinsSortValues.NAME_ASC;
   const [fieldName, direction] = sortBy.split('-');
   const modifier = direction === 'asc' ? 1 : -1;
 

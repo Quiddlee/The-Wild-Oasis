@@ -1,5 +1,8 @@
-import { DiscountFilterValues } from '../../types/enums.ts';
-import { DiscountFilterValueTypes, SortValueTypes } from '../../types/types.ts';
+import { CabinsFilterValues } from '../../types/enums.ts';
+import {
+  CabinsFilterValueTypes,
+  CabinsSortValueTypes,
+} from '../../types/types.ts';
 import Filter from '../../ui/Filter.tsx';
 import SortBy from '../../ui/SortBy.tsx';
 import TableOperations from '../../ui/TableOperations.tsx';
@@ -8,25 +11,25 @@ import { QUERY_DISCOUNT } from '../../utils/const.ts';
 function CabinTableOperations() {
   return (
     <TableOperations>
-      <Filter<DiscountFilterValueTypes>
+      <Filter<CabinsFilterValueTypes>
         filterField={QUERY_DISCOUNT}
         options={[
           {
             label: 'all',
-            value: DiscountFilterValues.ALL,
+            value: CabinsFilterValues.ALL,
           },
           {
             label: 'No Discount',
-            value: DiscountFilterValues.NO_DISCOUNT,
+            value: CabinsFilterValues.NO_DISCOUNT,
           },
           {
             label: 'With Discount',
-            value: DiscountFilterValues.WITH_DISCOUNT,
+            value: CabinsFilterValues.WITH_DISCOUNT,
           },
         ]}
       />
 
-      <SortBy<SortValueTypes>
+      <SortBy<CabinsSortValueTypes>
         options={[
           {
             label: 'Sort by name (A-Z)',

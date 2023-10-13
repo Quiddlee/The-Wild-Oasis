@@ -1,4 +1,9 @@
-import { DiscountFilterValues, SortValues } from './enums.ts';
+import {
+  BookingFilterValues,
+  BookingSortValues,
+  CabinsFilterValues,
+  CabinsSortValues,
+} from './enums.ts';
 
 export type Guests = Readonly<{
   id: number;
@@ -53,10 +58,14 @@ export type CreateCabinFormData = Omit<CabinType, 'image' | 'id'> &
     image: FileList | string;
   }>;
 
-export type DiscountFilterValueTypes = ExtractValues<
-  typeof DiscountFilterValues
+export type CabinsFilterValueTypes = ExtractValues<typeof CabinsFilterValues>;
+
+export type CabinsSortValueTypes = ExtractValues<typeof CabinsSortValues>;
+
+export type BookingsFilterValueTypes = ExtractValues<
+  typeof BookingFilterValues
 >;
 
-export type SortValueTypes = ExtractValues<typeof SortValues>;
+export type BookingsSortValueTypes = ExtractValues<typeof BookingSortValues>;
 
 export type VoidFn = () => void;
