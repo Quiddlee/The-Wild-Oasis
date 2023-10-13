@@ -7,7 +7,7 @@ import {
 } from 'react-icons/hi2';
 import styled from 'styled-components';
 
-import { Booking } from '../../types/types.ts';
+import { IBookingRowData } from '../../types/interfaces.ts';
 import DataItem from '../../ui/DataItem.tsx';
 import Flag from '../../ui/Flag.tsx';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers.ts';
@@ -17,7 +17,7 @@ interface IPriceProps {
 }
 
 interface IBookingDataBoxProps {
-  booking: Booking;
+  booking: IBookingRowData;
 }
 
 const StyledBookingDataBox = styled.section`

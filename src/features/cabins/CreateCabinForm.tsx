@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import useCreateCabin from './useCreateCabin.ts';
 import useUpdateCabin from './useUpdateCabin.ts';
-import type { Cabin } from '../../types/types.ts';
+import type { CabinType } from '../../types/types.ts';
 import { CreateCabinFormData } from '../../types/types.ts';
 import Button from '../../ui/Button.tsx';
 import FileInput from '../../ui/FileInput.tsx';
@@ -13,13 +13,13 @@ import Input from '../../ui/Input.tsx';
 import Textarea from '../../ui/Textarea.tsx';
 
 interface ICreateCabinForm {
-  cabinToEdit?: Cabin;
+  cabinToEdit?: CabinType;
   onCloseModal?: () => void;
 }
 
 function CreateCabinForm({
   onCloseModal,
-  cabinToEdit = {} as Cabin,
+  cabinToEdit = {} as CabinType,
 }: ICreateCabinForm) {
   const { id: editId, ...editValue } = cabinToEdit;
 
@@ -185,7 +185,7 @@ function CreateCabinForm({
 }
 
 CreateCabinForm.defaultProps = {
-  cabinToEdit: {} as Cabin,
+  cabinToEdit: {} as CabinType,
   onCloseModal: null,
 };
 

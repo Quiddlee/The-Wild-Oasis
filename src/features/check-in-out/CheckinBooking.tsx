@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import useMoveBack from '../../hooks/useMoveBack.ts';
-import { Booking } from '../../types/types.ts';
+import { IBookingRowData } from '../../types/interfaces.ts';
 import Button from '../../ui/Button.tsx';
 import ButtonGroup from '../../ui/ButtonGroup.tsx';
 import ButtonText from '../../ui/ButtonText.tsx';
@@ -20,7 +20,7 @@ import BookingDataBox from '../bookings/BookingDataBox.tsx';
 function CheckinBooking() {
   const moveBack = useMoveBack();
 
-  const booking = {} as Booking;
+  const booking = {} as IBookingRowData;
 
   const {
     id: bookingId,

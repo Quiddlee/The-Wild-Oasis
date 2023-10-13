@@ -2,8 +2,6 @@ import React, { createContext, useContext, useMemo } from 'react';
 
 import styled from 'styled-components';
 
-import { Cabin } from '../types/types.ts';
-
 const StyledTable = styled.div`
   border: 1px solid var(--color-grey-200);
 
@@ -75,9 +73,9 @@ interface ITableProps extends ICommonRow, IChildren {}
 
 interface ITableContext extends ICommonRow {}
 
-interface IBodyProps {
-  data: Cabin[];
-  render: (cabin: Cabin) => React.ReactNode;
+interface IBodyProps<TData> {
+  data: TData[];
+  render: (cabin: TData) => React.ReactNode;
 }
 
 const TableContext = createContext<ITableContext>({} as ITableContext);
@@ -112,7 +110,7 @@ function Row({ children }: IChildren) {
   );
 }
 
-function Body({ data, render }: IBodyProps) {
+function Body<TData>({ data, render }: IBodyProps<TData>) {
   const noData = !data.length;
 
   if (noData) return <Empty>No data to show at the moment</Empty>;

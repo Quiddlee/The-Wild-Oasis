@@ -1,16 +1,17 @@
 import { DiscountFilterValues, SortValues } from './enums.ts';
 
-export type Guest = Readonly<{
+export type Guests = Readonly<{
   id: number;
-  fullName: string;
-  email: string;
-  country: string;
   countryFlag: string;
+  created_at: string;
+  email: string;
+  fullName: string;
   nationalID: string;
   nationality: string;
+  country: string;
 }>;
 
-export type Cabin = Readonly<{
+export type CabinType = Readonly<{
   id: number;
   name: string;
   maxCapacity: number;
@@ -36,8 +37,6 @@ export type Booking = Readonly<{
   cabinId: number;
   guestId: number;
   isPaid: boolean;
-  guests: Guest;
-  cabins: Cabin;
 }>;
 
 export type Settings = Readonly<{
@@ -49,7 +48,7 @@ export type Settings = Readonly<{
 
 export type ExtractValues<TObj extends object> = TObj[keyof TObj];
 
-export type CreateCabinFormData = Omit<Cabin, 'image' | 'id'> &
+export type CreateCabinFormData = Omit<CabinType, 'image' | 'id'> &
   Readonly<{
     image: FileList | string;
   }>;

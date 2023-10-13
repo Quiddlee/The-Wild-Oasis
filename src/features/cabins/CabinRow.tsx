@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import CreateCabinForm from './CreateCabinForm.tsx';
 import useCreateCabin from './useCreateCabin.ts';
 import useDeleteCabin from './useDeleteCabin.ts';
-import type { Cabin } from '../../types/types.ts';
+import type { CabinType } from '../../types/types.ts';
 import ConfirmDelete from '../../ui/ConfirmDelete.tsx';
 import Menus from '../../ui/Menus.tsx';
 import Modal from '../../ui/Modal.tsx';
@@ -14,7 +14,7 @@ import Table from '../../ui/Table.tsx';
 import { formatCurrency } from '../../utils/helpers.ts';
 
 interface ICabinRow {
-  cabin: Cabin;
+  cabin: CabinType;
 }
 
 const Img = styled.img`

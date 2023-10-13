@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import supabase from './supabase.ts';
-import { Cabin, CreateCabinFormData } from '../types/types.ts';
+import { CabinType, CreateCabinFormData } from '../types/types.ts';
 
 export type NewCabin = Omit<CreateCabinFormData, 'image'> & {
   readonly image: string | File;
@@ -21,7 +21,10 @@ async function getCabins() {
   return data;
 }
 
-export async function createEditCabin(newCabin: NewCabin, id?: Cabin['id']) {
+export async function createEditCabin(
+  newCabin: NewCabin,
+  id?: CabinType['id'],
+) {
   const hasImagePath = isImageExist(newCabin.image);
 
   // Getting sure that the image has unique name with random num.

@@ -1,12 +1,13 @@
 import { format, isToday } from 'date-fns';
 import styled from 'styled-components';
 
-import { Booking } from '../../types/types.ts';
+import { IBookingRowData } from '../../types/interfaces.ts';
+import Table from '../../ui/Table.tsx';
 import Tag from '../../ui/Tag.tsx';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers.ts';
 
 interface IBookingRowProps {
-  booking: Booking;
+  booking: IBookingRowData;
 }
 
 const Cabin = styled.div`
@@ -36,6 +37,12 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
+enum StatusToTagName {
+  unconfirmed = 'blue',
+  'checked-in' = 'green',
+  'checked-out' = 'silver',
+}
+
 function BookingRow({
   booking: {
     // id: bookingId,
@@ -50,15 +57,8 @@ function BookingRow({
     cabins: { name: cabinName },
   },
 }: IBookingRowProps) {
-  const statusToTagName = {
-    unconfirmed: 'blue',
-    'checked-in': 'green',
-    'checked-out': 'silver',
-  };
-
   return (
-    // <Table.Row>
-    <>
+    <Table.Row>
       <Cabin>{cabinName}</Cabin>
 
       <Stacked>
@@ -79,13 +79,12 @@ function BookingRow({
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status as keyof typeof statusToTagName]}>
+      <Tag type={StatusToTagName[status as keyof typeof StatusToTagName]}>
         {status.replace('-', ' ')}
       </Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
-    </>
-    // </Table.Row>
+    </Table.Row>
   );
 }
 

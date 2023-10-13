@@ -2,11 +2,11 @@ import { isError, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { createEditCabin, NewCabin } from '../../services/apiCabins.ts';
-import { Cabin } from '../../types/types.ts';
+import { CabinType } from '../../types/types.ts';
 
 interface IUpdateMutationFn {
   newCabinData: NewCabin;
-  id: Cabin['id'];
+  id: CabinType['id'];
 }
 
 function useUpdateCabin() {
