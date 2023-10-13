@@ -5,12 +5,13 @@ import {
 import Filter from '../../ui/Filter.tsx';
 import SortBy from '../../ui/SortBy.tsx';
 import TableOperations from '../../ui/TableOperations.tsx';
+import { QUERY_STATUS } from '../../utils/const.ts';
 
 function BookingTableOperations() {
   return (
     <TableOperations>
       <Filter<BookingsFilterValueTypes>
-        filterField="status"
+        filterField={QUERY_STATUS}
         options={[
           { value: 'all', label: 'All' },
           { value: 'checked-out', label: 'Checked out' },

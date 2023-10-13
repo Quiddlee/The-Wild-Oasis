@@ -1,4 +1,5 @@
 import BookingTable from '../features/bookings/BookingTable.tsx';
+import BookingTableOperations from '../features/bookings/BookingTableOperations.tsx';
 import useBookings from '../features/bookings/useBookings.ts';
 import { IBookingRowData } from '../types/interfaces.ts';
 import Empty from '../ui/Empty.tsx';
@@ -18,7 +19,7 @@ function Bookings() {
     <>
       <Row type="horizontal">
         <Heading as="h1">All bookings</Heading>
-        <p>TEST</p>
+        <BookingTableOperations />
       </Row>
 
       <BookingTable bookings={bookings as unknown as IBookingRowData[]} />

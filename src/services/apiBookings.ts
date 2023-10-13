@@ -1,13 +1,32 @@
 /* eslint-disable no-console */
 
 import supabase from './supabase.ts';
+import { BookingsFilterValueTypes } from '../types/types.ts';
 
-export default async function getBookings() {
-  const { data, error } = await supabase
+interface Filter {
+  field: string;
+  value: BookingsFilterValueTypes;
+  method: 'gte' | 'lte';
+}
+
+export default async function getBookings(
+  filter: Filter | null,
+  // sortBy: string,
+) {
+  let query = supabase
     .from('bookings')
     .select(
       'id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)',
     );
+
+  // Filter
+  if (filter !== null) {
+    query = query[filter.method](filter.field, filter.value);
+  }
+
+  // Sort
+
+  const { data, error } = await query;
 
   if (error) {
     console.error(error);
