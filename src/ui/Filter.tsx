@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { IOptions } from '../types/interfaces.ts';
 
 interface IFilterButton {
-  active: boolean;
+  $active: boolean;
 }
 
 interface IFilterProps<TOptionsValues extends string>
@@ -28,7 +28,7 @@ const FilterButton = styled.button<IFilterButton>`
   text-transform: capitalize;
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       background-color: var(--color-brand-600);
       color: var(--color-brand-50);
@@ -64,7 +64,7 @@ function Filter<TOptionValues extends string>({
     <StyledFilter>
       {options.map((option) => (
         <FilterButton
-          active={currFilter === option.value}
+          $active={currFilter === option.value}
           disabled={currFilter === option.value}
           key={option.value}
           onClick={() => handleClick(option.value)}>

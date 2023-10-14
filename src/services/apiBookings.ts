@@ -2,6 +2,7 @@
 
 import supabase from './supabase.ts';
 import { BookingsFilterValueTypes } from '../types/types.ts';
+import { MAX_ITEMS_ON_PAGE } from '../utils/const.ts';
 
 interface IFilter {
   field: string;
@@ -17,14 +18,16 @@ interface ISortBy {
 export default async function getBookings(
   filter: IFilter | null,
   sortBy: ISortBy,
+  page: number,
 ) {
   let query = supabase
     .from('bookings')
     .select(
       'id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)',
+      { count: 'exact' },
     );
 
-  // IFilter
+  // Filter
   if (filter) {
     query = query[filter.method](filter.field, filter.value);
   }
@@ -36,14 +39,21 @@ export default async function getBookings(
     });
   }
 
-  const { data, error } = await query;
+  // Pagination
+  if (page) {
+    const from = (page - 1) * MAX_ITEMS_ON_PAGE;
+    const to = from + MAX_ITEMS_ON_PAGE - 1;
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
     console.error(error);
     throw new Error('Bookings could not be loaded');
   }
 
-  return data;
+  return { data, count };
 }
 
 /*

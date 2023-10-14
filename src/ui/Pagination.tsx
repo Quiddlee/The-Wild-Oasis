@@ -4,7 +4,7 @@ import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 import styled from 'styled-components';
 
 import useUrl from '../hooks/useUrl.ts';
-import { QUERY_PAGE } from '../utils/const.ts';
+import { MAX_ITEMS_ON_PAGE, QUERY_PAGE } from '../utils/const.ts';
 
 interface IPaginationButton {
   active?: boolean;
@@ -69,8 +69,6 @@ const PaginationButton = styled.button<IPaginationButton>`
     color: var(--color-brand-50);
   }
 `;
-
-const MAX_ITEMS_ON_PAGE = 10;
 
 function Pagination({ count }: IPaginationProps) {
   const { setUrl, readUrl } = useUrl();
