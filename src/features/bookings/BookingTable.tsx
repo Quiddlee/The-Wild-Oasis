@@ -2,6 +2,7 @@ import BookingRow from './BookingRow.tsx';
 import { IBookingRowData } from '../../types/interfaces.ts';
 import Empty from '../../ui/Empty.tsx';
 import Menus from '../../ui/Menus.tsx';
+import Pagination from '../../ui/Pagination.tsx';
 import Table from '../../ui/Table.tsx';
 
 interface IBookingTableProps {
@@ -31,6 +32,10 @@ function BookingTable({ bookings }: IBookingTableProps) {
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
+
+        <Table.Footer>
+          <Pagination count={15} />
+        </Table.Footer>
       </Table>
     </Menus>
   );
