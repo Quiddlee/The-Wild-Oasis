@@ -3,15 +3,20 @@
 import supabase from './supabase.ts';
 import { BookingsFilterValueTypes } from '../types/types.ts';
 
-interface Filter {
+interface IFilter {
   field: string;
   value: BookingsFilterValueTypes;
   method: 'gte' | 'lte';
 }
 
+interface ISortBy {
+  field: string;
+  direction: string;
+}
+
 export default async function getBookings(
-  filter: Filter | null,
-  // sortBy: string,
+  filter: IFilter | null,
+  sortBy: ISortBy,
 ) {
   let query = supabase
     .from('bookings')
@@ -19,12 +24,17 @@ export default async function getBookings(
       'id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)',
     );
 
-  // Filter
-  if (filter !== null) {
+  // IFilter
+  if (filter) {
     query = query[filter.method](filter.field, filter.value);
   }
 
   // Sort
+  if (sortBy) {
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === 'asc',
+    });
+  }
 
   const { data, error } = await query;
 
