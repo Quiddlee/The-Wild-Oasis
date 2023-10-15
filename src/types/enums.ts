@@ -26,3 +26,9 @@ export const BookingSortValues = {
   TOTAL_PRICE_DESC: 'totalPrice-desc',
   TOTAL_PRICE_ASC: 'totalPrice-asc',
 } as const;
+
+export const StatusToTagName = {
+  unconfirmed: 'blue',
+  'checked-in': 'green',
+  'checked-out': 'silver',
+} as const;

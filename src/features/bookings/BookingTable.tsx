@@ -1,6 +1,6 @@
 import BookingRow from './BookingRow.tsx';
 import useBookings from './useBookings.ts';
-import { IBookingRowData } from '../../types/interfaces.ts';
+import { IBookingData } from '../../types/interfaces.ts';
 import Empty from '../../ui/Empty.tsx';
 import Menus from '../../ui/Menus.tsx';
 import Pagination from '../../ui/Pagination.tsx';
@@ -27,8 +27,8 @@ function BookingTable() {
           <div />
         </Table.Header>
 
-        <Table.Body<IBookingRowData>
-          data={bookings as unknown as IBookingRowData[]}
+        <Table.Body<IBookingData>
+          data={bookings as unknown as IBookingData[]}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
           )}

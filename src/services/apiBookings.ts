@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import supabase from './supabase.ts';
-import { BookingsFilterValueTypes } from '../types/types.ts';
+import { Booking, BookingsFilterValueTypes } from '../types/types.ts';
 import { MAX_ITEMS_ON_PAGE } from '../utils/const.ts';
 
 interface IFilter {
@@ -56,9 +56,7 @@ export default async function getBookings(
   return { data, count };
 }
 
-/*
-
-export async function getBooking(id: Pick<Booking, 'id'>) {
+export async function getBooking(id: Booking['id']) {
   const { data, error } = await supabase
     .from('bookings')
     .select('*, cabins(*), guests(*)')
@@ -72,6 +70,8 @@ export async function getBooking(id: Pick<Booking, 'id'>) {
 
   return data;
 }
+
+/*
 
 // Returns all BOOKINGS that are were created after the given date. Useful to get bookings created in the last 30 days, for example.
 export async function getBookingsAfterDate(date: Date) {

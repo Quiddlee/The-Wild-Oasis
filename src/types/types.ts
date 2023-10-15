@@ -3,6 +3,7 @@ import {
   BookingSortValues,
   CabinsFilterValues,
   CabinsSortValues,
+  StatusToTagName,
 } from './enums.ts';
 
 export type Guests = Readonly<{
@@ -27,8 +28,8 @@ export type CabinType = Readonly<{
 }>;
 
 export type Booking = Readonly<{
+  created_at: string;
   id: number;
-  createdAt: Date;
   startDate: string;
   endDate: string;
   numNights: number;
@@ -36,7 +37,7 @@ export type Booking = Readonly<{
   cabinPrice: number;
   extrasPrice: number;
   totalPrice: number;
-  status: string;
+  status: keyof typeof StatusToTagName;
   hasBreakfast: boolean;
   observations: boolean;
   cabinId: number;

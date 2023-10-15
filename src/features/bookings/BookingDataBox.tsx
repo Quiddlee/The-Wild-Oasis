@@ -7,17 +7,17 @@ import {
 } from 'react-icons/hi2';
 import styled from 'styled-components';
 
-import { IBookingRowData } from '../../types/interfaces.ts';
+import { IBookingData } from '../../types/interfaces.ts';
 import DataItem from '../../ui/DataItem.tsx';
 import Flag from '../../ui/Flag.tsx';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers.ts';
 
 interface IPriceProps {
-  isPaid: boolean;
+  $isPaid: boolean;
 }
 
 interface IBookingDataBoxProps {
-  booking: IBookingRowData;
+  booking: IBookingData;
 }
 
 const StyledBookingDataBox = styled.section`
@@ -85,9 +85,9 @@ const Price = styled.div<IPriceProps>`
   margin-top: 2.4rem;
 
   background-color: ${(props) =>
-    props.isPaid ? 'var(--color-green-100)' : 'var(--color-yellow-100)'};
+    props.$isPaid ? 'var(--color-green-100)' : 'var(--color-yellow-100)'};
   color: ${(props) =>
-    props.isPaid ? 'var(--color-green-700)' : 'var(--color-yellow-700)'};
+    props.$isPaid ? 'var(--color-green-700)' : 'var(--color-yellow-700)'};
 
   & p:last-child {
     text-transform: uppercase;
@@ -112,8 +112,7 @@ const Footer = styled.footer`
 // A purely presentational component
 function BookingDataBox({ booking }: IBookingDataBoxProps) {
   const {
-    // created_at
-    createdAt,
+    created_at: createdAt,
     startDate,
     endDate,
     numNights,
@@ -171,7 +170,7 @@ function BookingDataBox({ booking }: IBookingDataBoxProps) {
           {hasBreakfast ? 'Yes' : 'No'}
         </DataItem>
 
-        <Price isPaid={isPaid}>
+        <Price $isPaid={isPaid}>
           <DataItem icon={<HiOutlineCurrencyDollar />} label="Total price">
             {formatCurrency(totalPrice)}
 

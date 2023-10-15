@@ -9,7 +9,7 @@ export interface IOptions<TOptionValues extends string> {
   options: IOption<TOptionValues>[];
 }
 
-export interface IBookingRowData extends Booking {
+export interface IBookingData extends Booking {
   guests: Guests;
   cabins: CabinType;
 }
