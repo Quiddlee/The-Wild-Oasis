@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
 import { getBooking } from '../../services/apiBookings.ts';
+import { IBookingData } from '../../types/interfaces.ts';
 
 function useBookingDetails() {
   const { bookingId } = useParams();
@@ -9,7 +10,7 @@ function useBookingDetails() {
   if (bookingId === undefined) throw new Error('Cannot get booking id!');
 
   const { data: booking, isLoading } = useQuery({
-    queryKey: ['booking'],
+    queryKey: ['booking', bookingId],
     queryFn: () => getBooking(Number(bookingId)),
 
     // if we can't find booking that means that the data probably does not exist.
@@ -17,7 +18,10 @@ function useBookingDetails() {
     retry: false,
   });
 
-  return { booking, isLoading };
+  return { booking, isLoading } as unknown as {
+    booking: IBookingData;
+    isLoading: boolean;
+  };
 }
 
 export default useBookingDetails;

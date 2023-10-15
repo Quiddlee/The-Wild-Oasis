@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import supabase from './supabase.ts';
+import { Tables } from '../../database.types.ts';
 import { Booking, BookingsFilterValueTypes } from '../types/types.ts';
 import { MAX_ITEMS_ON_PAGE } from '../utils/const.ts';
 
@@ -127,7 +128,12 @@ export async function getStaysTodayActivity() {
   return data;
 }
 
-export async function updateBooking(id, obj) {
+*/
+
+export async function updateBooking(
+  id: Booking['id'],
+  obj: Partial<Tables<'bookings'>>,
+) {
   const { data, error } = await supabase
     .from('bookings')
     .update(obj)
@@ -139,8 +145,11 @@ export async function updateBooking(id, obj) {
     console.error(error);
     throw new Error('Booking could not be updated');
   }
+
   return data;
 }
+
+/*
 
 export async function deleteBooking(id) {
   // REMEMBER RLS POLICIES

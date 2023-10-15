@@ -32,3 +32,9 @@ export const StatusToTagName = {
   'checked-in': 'green',
   'checked-out': 'silver',
 } as const;
+
+export enum BookingStatus {
+  UNCONFIRMED = 'unconfirmed',
+  CHECKED_IN = 'checked-in',
+  CHECKED_OUT = 'checked-out',
+}

@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import useUrl from '../../hooks/useUrl.ts';
 import getBookings from '../../services/apiBookings.ts';
 import { BookingFilterValues, BookingSortValues } from '../../types/enums.ts';
+import { IBookingData } from '../../types/interfaces.ts';
 import { BookingsFilterValueTypes } from '../../types/types.ts';
 import {
   MAX_ITEMS_ON_PAGE,
@@ -59,7 +60,11 @@ function useBookings() {
       queryFn: () => getBookings(filter, sortBy, prevPage),
     });
 
-  return { bookings, isLoading, count };
+  return { bookings, isLoading, count } as {
+    bookings: IBookingData[];
+    isLoading: boolean;
+    count: number;
+  };
 }
 
 export default useBookings;

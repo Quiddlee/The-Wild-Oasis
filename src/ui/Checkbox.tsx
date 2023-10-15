@@ -3,11 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ICheckboxProps {
-  checked: boolean;
-  onChange: () => void;
-  disabled: boolean;
-  id: string;
-  children: React.ReactNode;
+  checked?: boolean;
+  onChange?: () => void;
+  disabled?: boolean;
+  id?: string;
+  children?: React.ReactNode;
 }
 
 const StyledCheckbox = styled.div`
@@ -51,10 +51,17 @@ function Checkbox({
         onChange={onChange}
         disabled={disabled}
       />
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label htmlFor={!disabled ? id : ''}>{children}</label>
+      <label htmlFor={id}>{children}</label>
     </StyledCheckbox>
   );
 }
+
+Checkbox.defaultProps = {
+  checked: null,
+  onChange: null,
+  disabled: null,
+  id: null,
+  children: null,
+};
 
 export default Checkbox;

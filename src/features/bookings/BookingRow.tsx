@@ -1,5 +1,5 @@
 import { format, isToday } from 'date-fns';
-import { HiEye } from 'react-icons/hi2';
+import { HiArrowDownOnSquare, HiEye } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -76,9 +76,7 @@ function BookingRow({
           {format(new Date(endDate), 'MMM dd yyyy')}
         </span>
       </Stacked>
-      <Tag type={StatusToTagName[status as keyof typeof StatusToTagName]}>
-        {status.replace('-', ' ')}
-      </Tag>
+      <Tag type={StatusToTagName[status]}>{status.replace('-', ' ')}</Tag>
       <Amount>{formatCurrency(totalPrice)}</Amount>
 
       <Menus.Menu>
@@ -89,6 +87,14 @@ function BookingRow({
             onClick={() => navigate(`/bookings/${bookingId}`)}>
             See details
           </Menus.Button>
+
+          {status === 'unconfirmed' && (
+            <Menus.Button
+              icon={<HiArrowDownOnSquare />}
+              onClick={() => navigate(`/checkin/${bookingId}`)}>
+              Check in
+            </Menus.Button>
+          )}
         </Menus.List>
       </Menus.Menu>
     </Table.Row>
