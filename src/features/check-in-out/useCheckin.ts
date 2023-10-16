@@ -2,9 +2,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
+import { Tables } from '../../../database.types.ts';
 import { updateBooking } from '../../services/apiBookings.ts';
 import { BookingStatus } from '../../types/enums.ts';
 import { Booking } from '../../types/types.ts';
+
+interface IMutateFnParams {
+  bookingId: Booking['id'];
+  breakfast?: Partial<Tables<'bookings'>>;
+}
 
 function useCheckin() {
   const queryClient = useQueryClient();
@@ -13,10 +19,12 @@ function useCheckin() {
   const { mutate: checkIn, isLoading: isCheckingIn } = useMutation({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    mutationFn: (bookingId: Booking['id']) =>
+    mutationFn: ({ bookingId, breakfast = {} }: IMutateFnParams) =>
       updateBooking(bookingId, {
         status: BookingStatus.CHECKED_IN,
         isPaid: true,
+        // ...(breakfast && { ...breakfast }),
+        ...breakfast,
       }),
 
     onSuccess: (data: Booking) => {
