@@ -24,7 +24,7 @@ function useBookings() {
       : {
           field: 'status',
           value: filterValue,
-          method: 'gte' as const,
+          method: 'eq' as const,
         };
 
   // Sort

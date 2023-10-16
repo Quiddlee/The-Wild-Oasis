@@ -8,7 +8,7 @@ import { MAX_ITEMS_ON_PAGE } from '../utils/const.ts';
 interface IFilter {
   field: string;
   value: BookingsFilterValueTypes;
-  method: 'gte' | 'lte';
+  method: 'gte' | 'lte' | 'eq';
 }
 
 interface ISortBy {
@@ -30,6 +30,8 @@ export default async function getBookings(
 
   // Filter
   if (filter) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     query = query[filter.method](filter.field, filter.value);
   }
 
