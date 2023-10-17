@@ -6,6 +6,7 @@ import { BookingFilterValues, BookingSortValues } from '../../types/enums.ts';
 import { IBookingData } from '../../types/interfaces.ts';
 import { BookingsFilterValueTypes } from '../../types/types.ts';
 import {
+  CACHE_BOOKINGS,
   MAX_ITEMS_ON_PAGE,
   QUERY_PAGE,
   QUERY_SORT,
@@ -40,7 +41,7 @@ function useBookings() {
 
   // Query
   const { data: { data: bookings, count } = {}, isLoading } = useQuery({
-    queryKey: ['bookings', filter, sortBy, page],
+    queryKey: [CACHE_BOOKINGS, filter, sortBy, page],
     queryFn: () => getBookings(filter, sortBy, page),
   });
 
@@ -49,14 +50,14 @@ function useBookings() {
 
   if (page < pageCount)
     void queryClient.prefetchQuery({
-      queryKey: ['bookings', filter, sortBy, nextPage],
+      queryKey: [CACHE_BOOKINGS, filter, sortBy, nextPage],
       queryFn: () => getBookings(filter, sortBy, nextPage),
     });
 
   // Pre-fetching prev page
   if (page > 1)
     void queryClient.prefetchQuery({
-      queryKey: ['bookings', filter, sortBy, prevPage],
+      queryKey: [CACHE_BOOKINGS, filter, sortBy, prevPage],
       queryFn: () => getBookings(filter, sortBy, prevPage),
     });
 

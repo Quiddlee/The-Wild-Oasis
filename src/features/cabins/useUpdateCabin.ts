@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 
 import { createEditCabin, NewCabin } from '../../services/apiCabins.ts';
 import { CabinType } from '../../types/types.ts';
+import { CACHE_CABINS } from '../../utils/const.ts';
 
 interface IUpdateMutationFn {
   newCabinData: NewCabin;
@@ -17,7 +18,7 @@ function useUpdateCabin() {
       createEditCabin(newCabinData, id),
     onSuccess: () => {
       toast.success('Cabin successfully edited!');
-      void queryClient.invalidateQueries({ queryKey: ['cabins'] });
+      void queryClient.invalidateQueries({ queryKey: [CACHE_CABINS] });
     },
     onError: (error) => {
       if (isError(error)) toast.error(error.message);

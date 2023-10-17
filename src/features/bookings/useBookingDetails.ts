@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { getBooking } from '../../services/apiBookings.ts';
 import { IBookingData } from '../../types/interfaces.ts';
+import { CACHE_BOOKINGS } from '../../utils/const.ts';
 
 function useBookingDetails() {
   const { bookingId } = useParams();
@@ -10,7 +11,7 @@ function useBookingDetails() {
   if (bookingId === undefined) throw new Error('Cannot get booking id!');
 
   const { data: booking, isLoading } = useQuery({
-    queryKey: ['booking', bookingId],
+    queryKey: [CACHE_BOOKINGS, bookingId],
     queryFn: () => getBooking(Number(bookingId)),
 
     // if we can't find booking that means that the data probably does not exist.

@@ -31,7 +31,7 @@ function useCheckin() {
       toast.success(`Booking #${data.id} successfully checked in`);
 
       // invalidates all the queries currently active on the page
-      void queryClient.invalidateQueries({ stale: true });
+      void queryClient.invalidateQueries();
       navigate('/');
     },
 

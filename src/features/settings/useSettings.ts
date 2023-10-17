@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { getSettings } from '../../services/apiSettings.ts';
 import { Settings } from '../../types/types.ts';
+import { CACHE_SETTINGS } from '../../utils/const.ts';
 
 function useSettings() {
   const {
@@ -9,7 +10,7 @@ function useSettings() {
     error,
     data: settings,
   } = useQuery({
-    queryKey: ['settings'],
+    queryKey: [CACHE_SETTINGS],
     queryFn: getSettings,
   });
 
