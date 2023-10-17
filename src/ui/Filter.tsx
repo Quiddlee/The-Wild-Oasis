@@ -1,7 +1,8 @@
-import { useSearchParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
+import useUrl from '../hooks/useUrl.ts';
 import { IOptions } from '../types/interfaces.ts';
+import { QUERY_PAGE } from '../utils/const.ts';
 
 interface IFilterButton {
   $active: boolean;
@@ -51,13 +52,17 @@ function Filter<TOptionValues extends string>({
   filterField,
   options,
 }: IFilterProps<TOptionValues>) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { setUrl, readUrl } = useUrl();
 
-  const currFilter = searchParams.get(filterField) ?? options.at(0)!.value;
+  const currFilter = readUrl(filterField) ?? options.at(0)!.value;
 
   function handleClick(value: TOptionValues) {
-    searchParams.set(filterField, value);
-    setSearchParams(searchParams);
+    const notFirstPage = readUrl(QUERY_PAGE);
+    setUrl(filterField, value);
+
+    if (notFirstPage) {
+      setUrl(QUERY_PAGE, '1');
+    }
   }
 
   return (
