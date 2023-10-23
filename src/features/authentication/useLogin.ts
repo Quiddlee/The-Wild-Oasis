@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-import login from '../../services/apiAuth.ts';
+import { login } from '../../services/apiAuth.ts';
+import { CACHE_USER } from '../../utils/const.ts';
 
 interface IMutationFnParams {
   email: string;
@@ -11,6 +12,7 @@ interface IMutationFnParams {
 }
 
 function useLogin() {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const {
@@ -20,9 +22,10 @@ function useLogin() {
   } = useMutation({
     mutationFn: ({ email, password }: IMutationFnParams) =>
       login({ email, password }),
-    onSuccess: () => {
+    onSuccess: (user) => {
       toast.success('Successfully logged in');
-      navigate('/');
+      navigate('/dashboard');
+      queryClient.setQueryData([CACHE_USER], user);
     },
     onError: (err) => {
       console.log('Error', err);

@@ -15,6 +15,7 @@ import Settings from './pages/Settings.tsx';
 import Users from './pages/Users.tsx';
 import GlobalStyles from './styles/GlobalStyles.tsx';
 import AppLayout from './ui/AppLayout.tsx';
+import ProtectedRoute from './ui/ProtectedRoute.tsx';
 
 // const oneMinute = 60 * 1000;
 
@@ -34,7 +35,12 @@ function App() {
       <GlobalStyles />
       <HashRouter>
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }>
             <Route index element={<Navigate replace to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="bookings" element={<Bookings />} />
