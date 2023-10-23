@@ -24,8 +24,8 @@ function useLogin() {
       login({ email, password }),
     onSuccess: (user) => {
       toast.success('Successfully logged in');
-      navigate('/dashboard');
-      queryClient.setQueryData([CACHE_USER], user);
+      queryClient.setQueryData([CACHE_USER], user.user);
+      navigate('/dashboard', { replace: true });
     },
     onError: (err) => {
       console.log('Error', err);
