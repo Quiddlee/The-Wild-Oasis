@@ -5,6 +5,29 @@ interface ILoginParams {
   password: string;
 }
 
+interface ISignUpParams {
+  fullName: string;
+  email: string;
+  password: string;
+}
+
+export async function signUp({ fullName, email, password }: ISignUpParams) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        fullName,
+        avatar: '',
+      },
+    },
+  });
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 export async function login({ email, password }: ILoginParams) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
