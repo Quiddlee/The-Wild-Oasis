@@ -24,6 +24,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react/jsx-props-no-spreading': 0,
     'no-void': 0,
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
