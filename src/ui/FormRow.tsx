@@ -1,11 +1,11 @@
-import React from 'react';
+import { ReactElement } from 'react';
 
 import styled from 'styled-components';
 
 interface IFormRow {
   label?: string;
   error?: string | undefined;
-  children: React.ReactElement;
+  children: ReactElement;
 }
 
 const StyledFormRow = styled.div`

@@ -1,3 +1,4 @@
+import UpdateUserDataForm from '../features/authentication/UpdateUserDataForm.tsx';
 import Heading from '../ui/Heading.tsx';
 import Row from '../ui/Row.tsx';
 
@@ -8,7 +9,7 @@ function Account() {
 
       <Row>
         <Heading as="h3">Update user data</Heading>
-        <p>Update user data form</p>
+        <UpdateUserDataForm />
       </Row>
 
       <Row>

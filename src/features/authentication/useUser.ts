@@ -9,6 +9,8 @@ function useUser() {
     queryKey: [CACHE_USER],
   });
 
+  if (!user) throw new Error('The user does not exist!');
+
   return { user, isLoading, isAuthenticated: user?.role === 'authenticated' };
 }
 
