@@ -13,8 +13,8 @@ interface ISignUpParams {
 
 interface IUpdateCurrentUserParams {
   password?: string;
-  fullName: string;
-  avatar: File | null;
+  fullName?: string;
+  avatar?: File | null;
 }
 
 export async function signUp({ fullName, email, password }: ISignUpParams) {

@@ -1,3 +1,4 @@
+import UpdatePasswordForm from '../features/authentication/UpdatePasswordForm.tsx';
 import UpdateUserDataForm from '../features/authentication/UpdateUserDataForm.tsx';
 import Heading from '../ui/Heading.tsx';
 import Row from '../ui/Row.tsx';
@@ -14,7 +15,7 @@ function Account() {
 
       <Row>
         <Heading as="h3">Update password</Heading>
-        <p>Update user password form</p>
+        <UpdatePasswordForm />
       </Row>
     </>
   );
