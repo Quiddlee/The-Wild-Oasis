@@ -1,5 +1,6 @@
 import { SyntheticEvent, useCallback, useState } from 'react';
 
+import useUpdateUser from './useUpdateUser.ts';
 import useUser from './useUser.ts';
 import Button from '../../ui/Button.tsx';
 import FileInput from '../../ui/FileInput.tsx';
@@ -16,12 +17,33 @@ function UpdateUserDataForm() {
     },
   } = useUser();
 
-  const [fullName, setFullName] = useState(currentFullName);
-  const [, setAvatar] = useState<File | null>(null);
+  const { updateUser, isUpdating } = useUpdateUser();
 
-  const handleSubmit = useCallback((e: SyntheticEvent) => {
-    e.preventDefault();
-  }, []);
+  const [fullName, setFullName] = useState(currentFullName);
+  const [avatar, setAvatar] = useState<File | null>(null);
+
+  const handleSubmit = useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault();
+      if (!fullName) return;
+
+      updateUser(
+        { fullName, avatar },
+        {
+          onSuccess: () => {
+            setAvatar(null);
+            (e.target as HTMLFormElement).reset();
+          },
+        },
+      );
+    },
+    [avatar, fullName, updateUser],
+  );
+
+  const handleCancel = useCallback(() => {
+    setFullName(currentFullName);
+    setAvatar(null);
+  }, [currentFullName]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -31,6 +53,7 @@ function UpdateUserDataForm() {
 
       <FormRow label="Full name">
         <Input
+          disabled={isUpdating}
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
@@ -40,6 +63,7 @@ function UpdateUserDataForm() {
 
       <FormRow label="Avatar image">
         <FileInput
+          disabled={isUpdating}
           id="avatar"
           accept="image/*"
           onChange={(e) => setAvatar(e.target.files?.item(0) ?? null)}
@@ -48,10 +72,14 @@ function UpdateUserDataForm() {
 
       <FormRow>
         <>
-          <Button type="reset" variation="secondary">
+          <Button
+            onClick={handleCancel}
+            disabled={isUpdating}
+            type="reset"
+            variation="secondary">
             Cancel
           </Button>
-          <Button>Update account</Button>
+          <Button disabled={isUpdating}>Update account</Button>
         </>
       </FormRow>
     </Form>
