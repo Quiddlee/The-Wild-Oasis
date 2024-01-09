@@ -38,3 +38,7 @@ export enum BookingStatus {
   CHECKED_IN = 'checked-in',
   CHECKED_OUT = 'checked-out',
 }
+
+export const LocalStorageKeys = {
+  isDarkMode: 'isDarkMode',
+} as const;

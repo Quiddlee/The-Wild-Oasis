@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
 
-function useLocalStorageState(initialState: NonNullable<unknown>, key: string) {
-  const [value, setValue] = useState(() => {
-    const storedValue = localStorage.getItem(key);
+import { LocalStorageKeys } from '../types/enums.ts';
+
+function useLocalStorageState<TValue>(
+  initialState: NonNullable<unknown>,
+  key: keyof typeof LocalStorageKeys,
+) {
+  const [value, setValue] = useState<TValue>(() => {
+    const storedValue = localStorage.getItem(LocalStorageKeys[key]);
     return storedValue ? JSON.parse(storedValue) : initialState;
   });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(LocalStorageKeys[key], JSON.stringify(value));
   }, [value, key]);
 
-  return [value, setValue];
+  return [value, setValue] as [TValue, typeof setValue];
 }
 
 export default useLocalStorageState;
