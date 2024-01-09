@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useCallback, useMemo } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 
 import useLocalStorageState from '../hooks/useLocalStorageState.ts';
 
@@ -16,6 +22,16 @@ function DarkModeProvider({ children }: PropsWithChildren) {
     false,
     'isDarkMode',
   );
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+      document.documentElement.classList.remove('light-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+      document.documentElement.classList.add('light-mode');
+    }
+  }, [isDarkMode]);
 
   const toggleDarkMode = useCallback(() => {
     setIsDarkMode((isDark) => !isDark);

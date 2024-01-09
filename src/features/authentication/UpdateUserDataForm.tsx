@@ -1,5 +1,7 @@
 import { SyntheticEvent, useCallback, useState } from 'react';
 
+import { User } from '@supabase/supabase-js';
+
 import useUpdateUser from './useUpdateUser.ts';
 import useUser from './useUser.ts';
 import Button from '../../ui/Button.tsx';
@@ -15,7 +17,7 @@ function UpdateUserDataForm() {
       email,
       user_metadata: { fullName: currentFullName },
     },
-  } = useUser();
+  } = useUser() as { user: User };
 
   const { updateUser, isUpdating } = useUpdateUser();
 
