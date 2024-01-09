@@ -1,4 +1,5 @@
-/*
+import styled from 'styled-components';
+
 const StyledDashboardLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -6,4 +7,15 @@ const StyledDashboardLayout = styled.div`
   gap: 2.4rem;
 `;
 
- */
+function DashboardLayout() {
+  return (
+    <StyledDashboardLayout>
+      <div>Statistic</div>
+      <div>List of activity</div>
+      <div>Chart stay durations</div>
+      <div>Chart sales</div>
+    </StyledDashboardLayout>
+  );
+}
+
+export default DashboardLayout;
