@@ -89,7 +89,7 @@ export async function getBookingsAfterDate(date: string) {
     throw new Error('Bookings could not get loaded');
   }
 
-  return data;
+  return data as Booking[];
 }
 
 // Returns all STAYS that are were created after the given date
@@ -105,7 +105,7 @@ export async function getStaysAfterDate(date: string) {
     throw new Error('Bookings could not get loaded');
   }
 
-  return data;
+  return data as unknown as Booking[];
 }
 
 /*

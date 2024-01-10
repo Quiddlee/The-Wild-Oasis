@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import styled from 'styled-components';
 
 interface IColorProp {
@@ -5,9 +7,9 @@ interface IColorProp {
 }
 
 interface IStatParams {
-  icon: string;
+  icon: ReactNode;
   title: string;
-  value: string;
+  value: string | number;
   color: string;
 }
 

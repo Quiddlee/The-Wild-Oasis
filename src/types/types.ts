@@ -52,6 +52,12 @@ export type Settings = Readonly<{
   breakfastPrice: number;
 }>;
 
+export type Stay = Readonly<{
+  created_at: string;
+  totalPrice: number;
+  extrasPrice: number;
+}>;
+
 export type ExtractValues<TObj extends object> = TObj[keyof TObj];
 
 export type CreateCabinFormData = Omit<CabinType, 'image' | 'id'> &
