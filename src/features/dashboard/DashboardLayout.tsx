@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import SalesChart from './SalesChart.tsx';
 import Stats from './Stats.tsx';
 import useRecentBookings from './useRecentBookings.ts';
 import useRecentStays from './useRecentStays.ts';
@@ -32,6 +33,7 @@ function DashboardLayout() {
       <div>List of activity</div>
       <div>Chart stay durations</div>
       <div>Chart sales</div>
+      <SalesChart bookings={bookings} numDays={numDays} />
     </StyledDashboardLayout>
   );
 }
