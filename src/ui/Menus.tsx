@@ -154,6 +154,8 @@ function Toggle({ id }: IMenuChildProps) {
 
   const handleClick = useCallback(
     (e: SyntheticEvent) => {
+      e.stopPropagation();
+
       const target = e.target as HTMLElement;
       const rect =
         target.closest('button')?.getBoundingClientRect() ?? FALLBACK_RECT;
@@ -184,7 +186,7 @@ function Toggle({ id }: IMenuChildProps) {
 
 function List({ id, children }: IListProps) {
   const { openId, position, close } = useContext(MenusContext);
-  const ref = useOutsideClick<HTMLUListElement>(close);
+  const ref = useOutsideClick<HTMLUListElement>(close, false);
 
   const clickOnDifferentMenu = openId !== id;
 
