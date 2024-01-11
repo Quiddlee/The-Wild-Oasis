@@ -43,7 +43,7 @@ function CheckinBooking() {
   } = booking ?? {};
   const isLoading = isLoadingSettings || isLoadingBookings;
   const optionalBreakfastPrice =
-    settings!.breakfastPrice * numNights * numGuests;
+    (settings?.breakfastPrice ?? 1) * numNights * numGuests;
   let breakfastPrice = '';
 
   const handleCheckin = useCallback(() => {
