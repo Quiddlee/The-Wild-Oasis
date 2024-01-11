@@ -1,16 +1,20 @@
+import useCheckout from './useCheckout.ts';
 import { Booking } from '../../types/types.ts';
 import Button from '../../ui/Button.tsx';
 
 interface ICheckoutButtonProps {
-  bookingId: Pick<Booking, 'id'>;
+  bookingId: Booking['id'];
 }
 
 function CheckoutButton({ bookingId }: ICheckoutButtonProps) {
-  // eslint-disable-next-line no-console
-  console.log(bookingId);
+  const { checkout, isCheckingout } = useCheckout();
 
   return (
-    <Button variation="primary" size="small">
+    <Button
+      variation="primary"
+      size="small"
+      onClick={() => checkout(bookingId)}
+      disabled={isCheckingout}>
       Check out
     </Button>
   );

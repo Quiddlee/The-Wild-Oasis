@@ -8,3 +8,4 @@ export const CACHE_CABINS = 'cabins';
 export const CACHE_SETTINGS = 'settings';
 export const CACHE_USER = 'user';
 export const CACHE_STAYS = 'stays';
+export const CACHE_TODAY_ACTIVITY = 'todayActivity';

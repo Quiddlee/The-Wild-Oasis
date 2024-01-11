@@ -52,11 +52,7 @@ export type Settings = Readonly<{
   breakfastPrice: number;
 }>;
 
-export type Stay = Readonly<{
-  created_at: string;
-  totalPrice: number;
-  extrasPrice: number;
-}>;
+export type Activities = Booking & { guests: Guests };
 
 export type ExtractValues<TObj extends object> = TObj[keyof TObj];
 

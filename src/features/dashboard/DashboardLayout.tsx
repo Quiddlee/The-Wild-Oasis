@@ -7,6 +7,7 @@ import useRecentBookings from './useRecentBookings.ts';
 import useRecentStays from './useRecentStays.ts';
 import Spinner from '../../ui/Spinner.tsx';
 import useCabins from '../cabins/useCabins.ts';
+import TodayActivity from '../check-in-out/TodayActivity.tsx';
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -31,7 +32,7 @@ function DashboardLayout() {
         numDays={numDays}
         cabinCount={cabins.length}
       />
-      <div>List of activity</div>
+      <TodayActivity />
       <DurationChart confirmedStays={confirmedStays} />
       <SalesChart bookings={bookings} numDays={numDays} />
     </StyledDashboardLayout>
