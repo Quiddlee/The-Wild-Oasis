@@ -10,6 +10,7 @@ import Button from '../../ui/Button.tsx';
 import ButtonGroup from '../../ui/ButtonGroup.tsx';
 import ButtonText from '../../ui/ButtonText.tsx';
 import ConfirmDelete from '../../ui/ConfirmDelete.tsx';
+import Empty from '../../ui/Empty.tsx';
 import Heading from '../../ui/Heading.tsx';
 import Modal from '../../ui/Modal.tsx';
 import Row from '../../ui/Row.tsx';
@@ -31,6 +32,7 @@ function BookingDetail() {
   const { deleteBooking, isDeleting } = useDeleteBooking();
 
   if (isLoading) return <Spinner />;
+  if (!booking) return <Empty resourceName="booking" />;
 
   const { status, id: bookingId } = booking;
 
