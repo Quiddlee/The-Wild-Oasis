@@ -18,12 +18,9 @@ import GlobalStyles from './styles/GlobalStyles.tsx';
 import AppLayout from './ui/AppLayout.tsx';
 import ProtectedRoute from './ui/ProtectedRoute.tsx';
 
-// const oneMinute = 60 * 1000;
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // staleTime: oneMinute,
       staleTime: 0,
     },
   },
